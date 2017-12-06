@@ -39,7 +39,7 @@ def make2ndtxt(finalurl):
 	for i in finalurl:
 		user_agent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'
 		headers = { 'User-Agent' : user_agent , 'Referer': 'https://www.coedcherry.com/models/sybil-a?page=1' }  
-		data = None
+		data = None	
 		request = urllib2.Request(i, data, headers) 
 		d = urllib2.urlopen(request).read()
 		txtfile = open(str(count) + '.txt','wb')
@@ -47,7 +47,7 @@ def make2ndtxt(finalurl):
 		txtfile.close
 		print 'downloaded ' + str(count) + ' files'
 		count = count + 1
-		time.sleep(random.randint(5, 10))
+		time.sleep(random.randint(3, 5))
 	return len(finalurl)
 
 def makejpgurl(filepath):	
@@ -84,7 +84,7 @@ def downloadpictures(finalurl, count, num):
 		jpgfile.close
 		numbers = numbers + 1
 		print str(numbers) + '/' + str(l) + ' ' + str(count+1) + '/' + str(num)
-		time.sleep(random.randint(5, 10))
+		time.sleep(random.randint(3, 5))
 print 'please paste the url you want to download: '
 xxx = raw_input()
 
@@ -92,9 +92,13 @@ if os.path.exists('result') == False:
 	os.mkdir('result') 
 print 'start download!'
 num = make2ndtxt(get2ndpages(make1sttxt(xxx)))
+# start = 7
 print 'start to download pictures:'
+# num = 30
+
 for i in range(num):
 	downloadpictures(makejpgurl(str(i) + '.txt'), i, num)
 for i in range(num):
 	os.remove(str(i)+'.txt')
+os.remove('origin.txt')
 print 'congratulations! download over!'
