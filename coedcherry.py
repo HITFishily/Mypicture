@@ -1,3 +1,5 @@
+#  using python 2.7
+
 import re
 import urllib2  
 import time
